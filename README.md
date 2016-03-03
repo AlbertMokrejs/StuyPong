@@ -1,7 +1,6 @@
 # StuyPong
 
-Albert Mokrejs
-
-Boying Tang
-
+###Contributors
+Albert Mokrejs  
+Boying Tang  
 Chris Grant
