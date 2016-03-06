@@ -1,33 +1,44 @@
 <canvas height=300 width=300 id="slate"></canvas>
-<button id="clear">clear</button>
-<button id="start">start</button>
+<button id="clear">Reset</button>
 <button id="easy">Easy</button>
 <button id="med">Medium</button>
 <button id="hard">Hard</button>
 
 <script>
-var c = document.getElementById("slate");
-var ctx = c.getContext("2d");
+    var c = document.getElementById("slate");
+    var ctx = c.getContext("2d");
 
-var clr = document.getElementById("clear");
-var stt = document.getElementById("start");
-var eas = document.getElementById("easy");
-var med = document.getElementById("med");
-var hrd = document.getElementById("hard");
+    var clr = document.getElementById("clear");
+    var eas = document.getElementById("easy");
+    var med = document.getElementById("med");
+    var hrd = document.getElementById("hard");
 
-ctx.fillStyle = "#f0f000";
-ctx.strokeStyle = "#00f0f0";
+    var powerups = [];
+    var paddlev = 0;
+    var pycor = window.width/2 - 15;
 
-var xcor;
-var ycor;
-var yv = 0;
-var xv = 0;
+    var pad = new Image();
+    pad.src = "paddle.png";
 
-var exist = false;
-var run = false;
-var difficulty = 1;
+    var ball = new Image();
+    ball.src = "ball.png";
 
-var start = function(e){
+    ctx.fillStyle = "#f0f000";
+    ctx.strokeStyle = "#00f0f0";
+
+    var xcor;
+    var ycor;
+    var yv = 0;
+    var xv = 0;
+  
+    var pscore;
+    var cscore;
+  
+    var exist = false;
+    var run = false;
+    var difficulty = 1;
+    
+    var start = function(e){
   e.preventDefault();
   c.setAttribute("width",window.width);
   c.setAttribute("height",window.height);
@@ -36,14 +47,64 @@ var start = function(e){
       ycor = window.height/2;
       yv = -20;
       xv = Math.Random() * 40 - 20;
-      exist = ! exist
+      exist = ! exist;
       run = true;
+      ctx.drawImage(ball, xcor, ycor, 5, 5);
+      ctx.drawImage(pad, window.width - 5, pycor, 5, 30);
+      Window.requestAnimationFrame(play);
   }
   if (! run){
+      run = ! run;
+      Window.requestAnimationFrame(play);
+  } 
+    }
+    
+    var clear = function(e){
+  e.preventDefault();
+  exist = false;
+  run = false;
+  ctx.clearRect(0,0,c.width,c.height);
+  Window.cancelAnimationFrame(play);
+    }
+    
+    var play = function(){
+  ctx.clearRect(0,0,c.width,c.height);
+  movePaddle(); 
+  moveBall();
+  checkScore();
+  if (run){
+      Window.requestAnimationFrame(play);
   }
-  
-}
-
-
-
+    }
+    
+    var movePaddle = function(){
+  ctx.drawImage(pad, window.width - 5, pycor, 5, 30);
+    }
+    
+    var moveBall = function(){
+  if (xcor > window.width || xcor <  0){
+      xv  *= -1
+  }
+  if (ycor > window.height || ycor <  0){
+      yv *= -1
+  }
+  xcor += xv;
+  ycor += yv;
+  ctx.drawImage(ball, xcor, ycor, 5, 5);
+    }
+    
+    var checkScore = function(){
+    }
+    
+    var paddleUpdate = function(e){
+  key = e.keyCode
+  if (key == 38){
+      pycor -= paddlev;
+  }
+  else if (key == 40){
+      pycor += paddlev;
+  }
+    }
+    
 </script>
+
