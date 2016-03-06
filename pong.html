@@ -58,53 +58,54 @@
       Window.requestAnimationFrame(play);
   } 
     }
-    
-    var clear = function(e){
-  e.preventDefault();
-  exist = false;
-  run = false;
-  ctx.clearRect(0,0,c.width,c.height);
-  Window.cancelAnimationFrame(play);
-    }
-    
-    var play = function(){
-  ctx.clearRect(0,0,c.width,c.height);
-  movePaddle(); 
-  moveBall();
-  checkScore();
-  if (run){
-      Window.requestAnimationFrame(play);
+  
+  var clear = function(e){  
+    e.preventDefault();
+    exist = false;
+    run = false;
+    ctx.clearRect(0,0,c.width,c.height);
+    Window.cancelAnimationFrame(play);
   }
-    }
     
-    var movePaddle = function(){
-  ctx.drawImage(pad, window.width - 5, pycor, 5, 30);
+  var play = function(){
+    ctx.clearRect(0,0,c.width,c.height);
+    movePaddle(); 
+    moveBall();
+    checkScore();
+    if (run){
+        Window.requestAnimationFrame(play);
     }
-    
-    var moveBall = function(){
-  if (xcor > window.width || xcor <  0){
-      xv  *= -1
   }
-  if (ycor > window.height || ycor <  0){
-      yv *= -1
+    
+  var movePaddle = function(){
+    ctx.drawImage(pad, window.width - 5, pycor, 5, 30);
   }
-  xcor += xv;
-  ycor += yv;
-  ctx.drawImage(ball, xcor, ycor, 5, 5);
-    }
     
-    var checkScore = function(){
+  var moveBall = function(){
+    if (xcor > window.width || xcor <  0){
+        xv  *= -1
     }
+    if (ycor > window.height || ycor <  0){
+        yv *= -1
+    }
+    xcor += xv;
+    ycor += yv;
+    ctx.drawImage(ball, xcor, ycor, 5, 5);
+  }
     
-    var paddleUpdate = function(e){
-  key = e.keyCode
-  if (key == 38){
+  var checkScore = function(){
+  }
+    
+  var paddleUpdate = function(e){
+    key = e.keyCode
+    if (key == 38){
       pycor -= paddlev;
-  }
-  else if (key == 40){
-      pycor += paddlev;
-  }
     }
+    else if (key == 40){
+      pycor += paddlev;
+    }
+  }
     
+  c.addEventListener("keypress", paddleUpdate);
 </script>
 
