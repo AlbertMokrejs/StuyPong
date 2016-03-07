@@ -84,11 +84,11 @@ var movePaddle = function(){
 }
 
 var moveBall = function(){
-	if (xcor > window.width - 30 || xcor <  30){
+	if (xcor < 30 || (xcor > window.width - 30 && (ycor > pycor && ycor < pycor + 30))) {
 		xv *= -1
-		//needs to take note of paddles
+		//doesnt take not of AI paddle
 }
-if (ycor > window.height - 30 || ycor <  30){
+if (ycor > window.height || ycor <  0){
 		yv  *= -1
 }
 xcor += xv;
