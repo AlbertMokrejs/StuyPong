@@ -85,11 +85,11 @@ var movePaddle = function(){
 
 var moveBall = function(){
 	if (xcor > window.width - 30 || xcor <  30){
-		xv  •.= -1
+		xv *= -1
 		//needs to take note of paddles
 }
 if (ycor > window.height - 30 || ycor <  30){
-		yv  •.= -1
+		yv  *= -1
 }
 xcor += xv;
 	ycor += yv;
