@@ -125,6 +125,17 @@ else if (key == 40){
 	}
 }
 
+var paddleUpdate2 = function(e){
+`	key = e.keyCode;
+if (key == 38 && paddlev > 0){
+		paddlev = 0;
+}
+else if (key == 40 && paddlev < 0){
+		paddlev = 0;
+	}
+}
+
+c.addEventListener(“keyup”,paddleUpdate2);
 c.addEventListener("keydown", paddleUpdate);
 </script>
 
