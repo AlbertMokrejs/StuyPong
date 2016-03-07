@@ -109,12 +109,17 @@ var checkScore = function(){
 	
 }
 
-var BallReset = function(){
-
+var ballReset = function(){
+	xcor = window.width/2;
+	ycor = window.height/2;
+	xv = 20 * math.random() - 10;
+	yv = 20 * math.random() - 10;
+	
 }
 
+
 var paddleUpdate = function(e){
-`	key = e.keyCode;
+	key = e.keyCode;
 	if (paddlev == 0){
 		paddlev = 10;}
 if (key == 38){
@@ -126,7 +131,7 @@ else if (key == 40){
 }
 
 var paddleUpdate2 = function(e){
-`	key = e.keyCode;
+	key = e.keyCode;
 if (key == 38 && paddlev > 0){
 		paddlev = 0;
 }
