@@ -71,32 +71,33 @@ var clear = function(e){
 
 var play = function(){
 	ctx.clearRect(0,0,c.width,c.height);
-movePaddle();	
-moveBall();
+	movePaddle();	
+	moveBall();
+	moveAi();
 	checkScore();
-if (run){
+		if (run){
 		Window.requestAnimationFrame(play);
-}
+	}
 }
 
 var movePaddle = function(){
 	pycor = pycor + paddlev;
-	ctx.drawImage(pad, window.width - 5, pycor, 5, 30);
+	ctx.drawImage(pad, 30, pycor, 10, 50);
 }
 
 var moveBall = function(){
-if ( (xcor < 5 && ycor > aiycor && ycor < aiycor + 30)  || (xcor > window.width - 5 && ycor > pycor && ycor < pycor + 30)) {
+	if ( (xcor < 40 && ycor > aiycor && ycor < aiycor + 30)  || (xcor > window.width - 50 && ycor > pycor && ycor < pycor + 30)) {
 		xv *= -1
-}
-if (ycor > window.height || ycor <  0){
+	}
+	if (ycor > window.height || ycor <  0){
 		yv  *= -1
-}
-xcor += xv;
+	}
+	xcor += xv;
 	ycor += yv;
-ctx.drawImage(ball, xcor, ycor, 5, 5);
-ctx.drawImage(pad, window.width - 5, pycor, 5, 30);
+	ctx.drawImage(ball, xcor, ycor, 10, 10);
+	ctx.drawImage(pad, 30, pycor, 10, 50);
 }
-
+	
 var checkScore = function(){
 	if (xcor > window.width - 30
 		pscore = pscore + 1;
@@ -106,7 +107,6 @@ var checkScore = function(){
 		cscore = cscore + 1;
 		ballReset()
 	}
-	
 }
 
 var ballReset = function(){
@@ -117,8 +117,9 @@ var ballReset = function(){
 	
 		    }
 
-		    var aiMove = function(){
-		    }
+var aiMove = function(){
+	var x = aiPredict();
+}
 		    
 
 var aiPredict = function(){
@@ -139,20 +140,20 @@ var paddleUpdate = function(e){
 	key = e.keyCode;
 	if (paddlev == 0){
 		paddlev = 10;}
-if (key == 38){
+	if (key == 38){
 		paddlev = math.abs(paddlev);
-}
-else if (key == 40){
+	}
+	else if (key == 40){
 		paddlev = -1 * math.abs(paddlev);
 	}
 }
 
 var paddleUpdate2 = function(e){
 	key = e.keyCode;
-if (key == 38 && paddlev > 0){
+	if (key == 38 && paddlev > 0){
 		paddlev = 0;
-}
-else if (key == 40 && paddlev < 0){
+	}
+	else if (key == 40 && paddlev < 0){
 		paddlev = 0;
 	}
 }
