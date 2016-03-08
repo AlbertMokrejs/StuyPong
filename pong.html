@@ -16,7 +16,8 @@ var hrd = document.getElementById("hard");
 var powerups = [];
 var paddlev = 0;
 var pycor = window.height/2 - 15;
-var pxcor = 30;
+//var pxcor = 30;
+var aiycor = window.height/2 -15;
 
 var pad = new Image();
 pad.src = "paddle.png";
@@ -84,7 +85,7 @@ var movePaddle = function(){
 }
 
 var moveBall = function(){
-	if (xcor < 30 || (xcor > window.width - 30 && (ycor > pycor && ycor < pycor + 30))) {
+if ( (xcor < 30 && ycor > aiycor && ycor < aiycor + 30)  || (xcor > window.width - 30 && ycor > pycor && ycor < pycor + 30)) {
 		xv *= -1
 		//doesnt take not of AI paddle
 }
@@ -100,11 +101,11 @@ ctx.drawImage(pad, window.width - 5, pycor, 5, 30);
 var checkScore = function(){
 	if (xcor > window.width - 30
 		pscore = pscore + 1;
-		BallReset()
+	ballReset()
 	}
 	if (xcor <  30){
 		cscore = cscore + 1;
-		BallReset()
+		ballReset()
 	}
 	
 }
@@ -115,8 +116,11 @@ var ballReset = function(){
 	xv = 20 * math.random() - 10;
 	yv = 20 * math.random() - 10;
 	
-}
+		    }
 
+		    var aiMove = function(){
+		    }
+		    
 
 var paddleUpdate = function(e){
 	key = e.keyCode;
