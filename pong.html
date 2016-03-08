@@ -122,6 +122,20 @@ var ballReset = function(){
 		    }
 		    
 
+var aiPredict = function(){
+	if (xv > 0){
+	var t = (window.width - 30 - xcor)/xv
+	var x = math.abs(t - xcor)%window.height * math.pow(-1, math.floor(math.abs(t-xcor)/window.height) + window.height*math.floor(math.abs(t-xcor)/window.height);
+	}
+	if (xv < 0){
+	var t = ( window.width - 90 + xcor)/xv
+	var x = math.abs(t - xcor)%window.height * math.pow(-1, math.floor(math.abs(t-xcor)/window.height) + window.height*math.floor(math.abs(t-xcor)/window.height);
+	}
+	return x 
+}
+
+
+
 var paddleUpdate = function(e){
 	key = e.keyCode;
 	if (paddlev == 0){
