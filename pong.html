@@ -63,6 +63,18 @@ run = ! run;
   } 
 }
 
+var makePowerUp(a,x,y){
+	var z = {};
+	z["type"] = a;
+	z["xcor"] = x;
+	z["ycor"] = y;
+	return z;
+}
+
+var makeRandomLoc(a){
+	
+}
+
 var clear = function(e){
 	e.preventDefault();
 	exist = false;
