@@ -63,16 +63,23 @@ run = ! run;
   } 
 }
 
-var makePowerUp = function(a,x,y){
+var makePowerUp = new function(a,x,y){
 	var z = {};
 	z["type"] = a;
 	z["xcor"] = x;
 	z["ycor"] = y;
 	return z;
 }
+var makeRandomLoc = new function(a){
+	var newx = math.random() * (window.width - 60) + 30;
+	var newy = math.random() * (window.height - 60) + 30;
+	return makePowerUp(a,newx,newy);
+}
 
-var makeRandomLoc = function(a){
-	
+var  randomPowerUp = new function(){
+	var types = [“bpaddle”,”smallpaddle”,”fast”,”slow”,”randdir”];
+	var type = types[math.floor(math.random() * 5)];
+	return makeRandomLoc(type);
 }
 
 var clear = function(e){
