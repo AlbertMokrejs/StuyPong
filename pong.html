@@ -110,7 +110,7 @@ var moveBall = function(){
 	if ( (xcor < 40 && ycor > aiycor && ycor < aiycor + 30)  || (xcor > window.width - 50 && ycor > pycor && ycor < pycor + 30)) {
 		xv *= -1
 	}
-	if (ycor > window.height || ycor <  0){
+	if (ycor > window.height - 30 || ycor <  30){
 		yv  *= -1
 	}
 	xcor += xv;
@@ -146,11 +146,11 @@ var aiMove = function(){
 var aiPredict = function(){
 	if (xv > 0){
 	var t = (window.width - 30 - xcor)/xv
-	var x = math.abs(t*yv - ycor)%window.height * math.pow(-1, math.floor(math.abs(t*yv - ycor)/window.height)) + window.height*math.floor(math.abs(t-xcor)/window.height);
+	var x = math.abs(t*yv - ycor)%(window.height - 60)* math.pow(-1, math.floor(math.abs(t*yv - ycor)/(window.height - 60))) + (window.height - 60)/2);
 	}
 	if (xv < 0){
 	var t = ( window.width - 90 + xcor)/xv
-	var x = math.abs(t*yv - ycor)%window.height * math.pow(-1, math.floor(math.abs(t*yv - ycor)/window.height)) + window.height*math.floor(math.abs(t-xcor)/window.height);
+	var x = math.abs(t*yv - ycor)%(window.height - 60) * math.pow(-1, math.floor(math.abs(t*yv - ycor)/(window.height - 60))) + (window.height - 60)/2);
 	}
 	return x 
 }
