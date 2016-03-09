@@ -63,7 +63,7 @@ run = ! run;
   } 
 }
 
-var makePowerUp(a,x,y){
+var makePowerUp = function(a,x,y){
 	var z = {};
 	z["type"] = a;
 	z["xcor"] = x;
@@ -71,7 +71,7 @@ var makePowerUp(a,x,y){
 	return z;
 }
 
-var makeRandomLoc(a){
+var makeRandomLoc = function(a){
 	
 }
 
@@ -113,7 +113,7 @@ var moveBall = function(){
 }
 	
 var checkScore = function(){
-	if (xcor > window.width - 30
+	if (xcor > window.width - 30){
 		pscore = pscore + 1;
 	ballReset()
 	}
@@ -139,11 +139,11 @@ var aiMove = function(){
 var aiPredict = function(){
 	if (xv > 0){
 	var t = (window.width - 30 - xcor)/xv
-	var x = math.abs(t*yv - ycor)%window.height * math.pow(-1, math.floor(math.abs(t*yv - ycor)/window.height) + window.height*math.floor(math.abs(t-xcor)/window.height);
+	var x = math.abs(t*yv - ycor)%window.height * math.pow(-1, math.floor(math.abs(t*yv - ycor)/window.height)) + window.height*math.floor(math.abs(t-xcor)/window.height);
 	}
 	if (xv < 0){
 	var t = ( window.width - 90 + xcor)/xv
-	var x = math.abs(t*yv - ycor)%window.height * math.pow(-1, math.floor(math.abs(t*yv - ycor)/window.height) + window.height*math.floor(math.abs(t-xcor)/window.height);
+	var x = math.abs(t*yv - ycor)%window.height * math.pow(-1, math.floor(math.abs(t*yv - ycor)/window.height)) + window.height*math.floor(math.abs(t-xcor)/window.height);
 	}
 	return x 
 }
