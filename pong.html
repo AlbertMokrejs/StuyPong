@@ -63,23 +63,29 @@ run = ! run;
   } 
 }
 
-var makePowerUp = new function(a,x,y){
+var makePowerUp =  function(a,x,y){
 	var z = {};
 	z["type"] = a;
 	z["xcor"] = x;
 	z["ycor"] = y;
+	if (type == "bpaddle" || type == "smallpaddle"){
+		z["time"] = 600;
+	}
+	else {
+		z["time"] = 1;
+	}
 	return z;
 }
-var makeRandomLoc = new function(a){
+var makeRandomLoc = function(a){
 	var newx = math.random() * (window.width - 60) + 30;
 	var newy = math.random() * (window.height - 60) + 30;
 	return makePowerUp(a,newx,newy);
 }
 
-var  randomPowerUp = new function(){
-	var types = [“bpaddle”,”smallpaddle”,”fast”,”slow”,”randdir”];
+var  randomPowerUp = function(){
+	var types = ["bpaddle","smallpaddle","fast","slow","randdir"];
 	var type = types[math.floor(math.random() * 5)];
-	return makeRandomLoc(type);
+	powerups[powerups.length] = makeRandomLoc(type);
 }
 
 var clear = function(e){
@@ -113,10 +119,60 @@ var moveBall = function(){
 	if (ycor > window.height - 30 || ycor <  30){
 		yv  *= -1
 	}
+	if (findIn("randdir") != -1){
+		xv = math.random() * 40 - 20;
+		yv = math.random() * 40 - 20;
+		powerups[findIn("randdir")]["time"] = powerups[findIn("randdir")]["time"] - 1;
+		if (powerups[findIn("randdir")]["time"] == 0){
+			powerups.splice(powerups[findIn("randdir")], 1);
+		}
+	}
+	if (findIn("slow") != -1){
+		xv = xv / 2;
+		yv = yv / 2;
+		powerups[findIn("slow")]["time"] = powerups[findIn("slow")]["time"] - 1;
+		if (powerups[findIn("slow")]["time"] == 0){
+			powerups.splice(powerups[findIn("slow")], 1);
+		}
+	}
+	if (findIn("fast") != -1){
+		xv = xv * 2;
+		yv = yv * 2;
+		powerups[findIn("fast")]["time"] = powerups[findIn("fast")]["time"] - 1;
+		if (powerups[findIn("fast")]["time"] == 0){
+			powerups.splice(powerups[findIn("fast")], 1);
+		}
+	}
 	xcor += xv;
 	ycor += yv;
 	ctx.drawImage(ball, xcor, ycor, 10, 10);
+	if (findIn("bpaddle") != -1){
+		ctx.drawImage(pad, 30, pycor, 10, 100);
+		powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
+		if (powerups[findIn("bpaddle")]["time"] == 0){
+			powerups.splice(powerups[findIn("bpaddle")], 1);
+		}
+	} else {
+	if (findIn("smallpaddle") != -1){
+		ctx.drawImage(pad, 30, pycor, 10, 25);
+		powerups[findIn("smallpaddle")]["time"] = powerups[findIn("smallpaddle")]["time"] - 1;
+		if (powerups[findIn("smallpaddle")]["time"] == 0){
+			powerups.splice(powerups[findIn("smallpaddle")], 1);
+		}
+	}
+	else {
 	ctx.drawImage(pad, 30, pycor, 10, 50);
+	}
+	}
+}
+
+var findIn = function(a){
+	for( i = 0; i < powerups.length; i++){
+		if (powerups[i]["type"] == a){
+			return i;
+		}
+	}
+	return -1;
 }
 	
 var checkScore = function(){
