@@ -77,14 +77,14 @@ var makePowerUp =  function(a,x,y){
 	return z;
 }
 var makeRandomLoc = function(a){
-	var newx = math.random() * (window.width - 60) + 30;
-	var newy = math.random() * (window.height - 60) + 30;
+	var newx = Math.random() * (window.width - 60) + 30;
+	var newy = Math.random() * (window.height - 60) + 30;
 	return makePowerUp(a,newx,newy);
 }
 
 var  randomPowerUp = function(){
 	var types = ["bpaddle","smallpaddle","fast","slow","randdir"];
-	var type = types[math.floor(math.random() * 5)];
+	var type = types[Math.floor(Math.random() * 5)];
 	powerups[powerups.length] = makeRandomLoc(type);
 }
 
@@ -123,8 +123,8 @@ var moveBall = function(){
 		yv  *= -1
 	}
 	if (findIn("randdir") != -1){
-		xv = math.random() * 40 - 20;
-		yv = math.random() * 40 - 20;
+		xv = Math.random() * 40 - 20;
+		yv = Math.random() * 40 - 20;
 		powerups[findIn("randdir")]["time"] = powerups[findIn("randdir")]["time"] - 1;
 		if (powerups[findIn("randdir")]["time"] == 0){
 			powerups.splice(powerups[findIn("randdir")], 1);
@@ -192,8 +192,8 @@ var checkScore = function(){
 var ballReset = function(){
 	xcor = window.width/2;
 	ycor = window.height/2;
-	xv = 20 * math.random() - 10;
-	yv = 20 * math.random() - 10;
+	xv = 20 * Math.random() - 10;
+	yv = 20 * Math.random() - 10;
 	
 		    }
 
@@ -205,11 +205,11 @@ var aiMove = function(){
 var aiPredict = function(){
 	if (xv > 0){
 	var t = (window.width - 30 - xcor)/xv
-	var x = math.abs(t*yv - ycor)%(window.height - 60)* math.pow(-1, math.floor(math.abs(t*yv - ycor)/(window.height - 60)) + (window.height - 60)/2);
+	var x = Math.abs(t*yv - ycor)%(window.height - 60)* Math.pow(-1, Math.floor(Math.abs(t*yv - ycor)/(window.height - 60)) + (window.height - 60)/2);
 	}
 	if (xv < 0){
 	var t = ( window.width - 90 + xcor)/xv
-	var x = math.abs(t*yv - ycor)%(window.height - 60) * math.pow(-1, math.floor(math.abs(t*yv - ycor)/(window.height - 60)) + (window.height - 60)/2);
+	var x = Math.abs(t*yv - ycor)%(window.height - 60) * Math.pow(-1, Math.floor(Math.abs(t*yv - ycor)/(window.height - 60)) + (window.height - 60)/2);
 	}
 	return x 
 }
