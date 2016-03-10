@@ -101,6 +101,7 @@ var play = function(){
 	movePaddle();	
 	moveBall();
 	//moveAi();
+	
 	checkScore();
 		if (run){
 		window.requestAnimationFrame(play);
@@ -161,7 +162,7 @@ var moveBall = function(){
 		}
 	}
 	else {
-	ctx.drawImage(pad, 30, pycor, 10, 50);
+	ctx.drawImage(ball, xcor, ycor, 10, 10);
 	}
 	}
 }
