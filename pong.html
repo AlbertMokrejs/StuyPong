@@ -29,6 +29,52 @@
 
   ctx.fillStyle = "#f0f000";
   ctx.strokeStyle = "#00f0f0";
+/** Suggestion for organizing code
+ *
+ *
+ *
+
+  var Ball = {
+    coors: {
+      x: 0,
+      y: 0
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    },
+    render: function () {
+
+    }
+  }
+
+  var Player = {
+    score: 0,
+    pos: 0,
+    velocity: 0,
+    render: function () {
+
+    },
+    move: function () {
+
+    }
+  }
+
+  var Computer = {
+    score: 0,
+    pos: 0,
+    velocity: 0,
+    predict: function () {
+
+    }
+    render: function () {
+
+    },
+    move: function () {
+
+    }
+  }
+**/
 
   var xcor;
   var ycor;
