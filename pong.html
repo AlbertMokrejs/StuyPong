@@ -44,8 +44,8 @@ var difficulty = 1;
 
 var start = function(e){
   e.preventDefault();
-  c.setAttribute("width",window.width);
-  c.setAttribute("height",window.height);
+  ctx.canvas.width  = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
   if (! exist){
       xcor = window.width - 50;
       ycor = window.height/2;
