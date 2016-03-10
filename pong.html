@@ -5,13 +5,13 @@
 <button id="hard">Hard</button>
 
 <script>
-var c = document.getElementById("slate");
-var ctx = c.getContext("2d");
+  var c = document.getElementById("slate");
+  var ctx = c.getContext("2d");
 
-var clr = document.getElementById("clear");
-var eas = document.getElementById("easy");
-var med = document.getElementById("med");
-var hrd = document.getElementById("hard");
+  var clr = document.getElementById("clear");
+  var eas = document.getElementById("easy");
+  var med = document.getElementById("med");
+  var hrd = document.getElementById("hard");
 
 var powerups = [];
 var paddlev = 0;
@@ -21,26 +21,72 @@ var pxcor = 30;
 
 var aiycor = window.innerHeight/2 -30;
 
-var pad = new Image();
-pad.src = "paddle.png";
+  var pad = new Image();
+  pad.src = "paddle.png";
 
-var ball = new Image();
-ball.src = "ball.png";
+  var ball = new Image();
+  ball.src = "ball.png";
 
-ctx.fillStyle = "#f0f000";
-ctx.strokeStyle = "#00f0f0";
+  ctx.fillStyle = "#f0f000";
+  ctx.strokeStyle = "#00f0f0";
+/** Suggestion for organizing code
+ *
+ *
+ *
 
-var xcor;
-var ycor;
-var yv = 0;
-var xv = 0;
+  var Ball = {
+    coors: {
+      x: 0,
+      y: 0
+    },
+    velocity: {
+      x: 0,
+      y: 0
+    },
+    render: function () {
 
-var pscore;
-var cscore;
+    }
+  }
 
-var exist = false;
-var run = false;
-var difficulty = 1;
+  var Player = {
+    score: 0,
+    pos: 0,
+    velocity: 0,
+    render: function () {
+
+    },
+    move: function () {
+
+    }
+  }
+
+  var Computer = {
+    score: 0,
+    pos: 0,
+    velocity: 0,
+    predict: function () {
+
+    }
+    render: function () {
+
+    },
+    move: function () {
+
+    }
+  }
+**/
+
+  var xcor;
+  var ycor;
+  var yv = 0;
+  var xv = 0;
+
+  var pscore;
+  var cscore;
+
+  var exist = false;
+  var run = false;
+  var difficulty = 1;
 
 var start = function(e){
   e.preventDefault();
@@ -51,7 +97,7 @@ var start = function(e){
       ycor = window.innerHeight/2;
       yv = -20;
       xv = Math.random() * 40 - 20;
-      exist = ! exist;
+      exist = !exist;
       run = true;
 
 window.requestAnimationFrame(play);
@@ -247,5 +293,3 @@ document.addEventListener("keyup",paddleUp);
 document.addEventListener("keydown", paddleDown);
 eas.addEventListener("click", start);
 </script>
-
-
