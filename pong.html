@@ -166,45 +166,81 @@
       yv *= -1
     }
     if (findIn("randdir") != -1) {
+      var tmpx = Math.abs(powerups[findIn("randdir")]["xcor"];
+      var tmpy = Math.abs(powerups[findIn("randdir")]["ycor"];
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(tmpx - 10, tmpy - 10, tmpx + 10, tmpy - 10);
+      if (Math.abs(powerups[findIn("randdir")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("randdir")]["ycor"] - ycor) < 10){
       xv = math.random() * 40 - 20;
       yv = math.random() * 40 - 20;
       powerups[findIn("randdir")]["time"] = powerups[findIn("randdir")]["time"] - 1;
       if (powerups[findIn("randdir")]["time"] == 0) {
         powerups.splice(powerups[findIn("randdir")], 1);
       }
+      }
     }
     if (findIn("slow") != -1) {
+      var tmpx = Math.abs(powerups[findIn("slow")]["xcor"];
+      var tmpy = Math.abs(powerups[findIn("slow")]["ycor"];
+      ctx.fillStyle = "#00FF00";
+      ctx.fillRect(tmpx - 10, tmpy - 10, tmpx + 10, tmpy - 10);
+      if (Math.abs(powerups[findIn("slow")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("slow")]["ycor"] - ycor) < 10){
       xv = xv / 2;
       yv = yv / 2;
       powerups[findIn("slow")]["time"] = powerups[findIn("slow")]["time"] - 1;
       if (powerups[findIn("slow")]["time"] == 0) {
         powerups.splice(powerups[findIn("slow")], 1);
       }
+      }
     }
     if (findIn("fast") != -1) {
+      var tmpx = Math.abs(powerups[findIn("fast")]["xcor"];
+      var tmpy = Math.abs(powerups[findIn("fast")]["ycor"];
+      ctx.fillStyle = "#0000FF";
+      ctx.fillRect(tmpx - 10, tmpy - 10, tmpx + 10, tmpy - 10)
+      if (Math.abs(powerups[findIn("fast")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("fast")]["ycor"] - ycor) < 10){
       xv = xv * 2;
       yv = yv * 2;
       powerups[findIn("fast")]["time"] = powerups[findIn("fast")]["time"] - 1;
       if (powerups[findIn("fast")]["time"] == 0) {
         powerups.splice(powerups[findIn("fast")], 1);
       }
+      }
     }
     xcor += xv;
     ycor += yv;
     ctx.drawImage(ball, xcor, ycor, 10, 10);
     if (findIn("bpaddle") != -1) {
+      var tmpx = Math.abs(powerups[findIn("bpaddle")]["xcor"];
+      var tmpy = Math.abs(powerups[findIn(""bpaddle")]["ycor"];
+      ctx.fillStyle = "#FF00FF";
+      ctx.fillRect(tmpx - 10, tmpy - 10, tmpx + 10, tmpy - 10)
+      if (Math.abs(powerups[findIn("fast")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("fast")]["ycor"] - ycor) < 10){
       ctx.drawImage(pad, 30, pycor, 10, 100);
       powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
       if (powerups[findIn("bpaddle")]["time"] == 0) {
         powerups.splice(powerups[findIn("bpaddle")], 1);
       }
+      }
+      else {
+        ctx.drawImage(bad, xcor, ycor, 10, 50);
+      }
     } else {
       if (findIn("smallpaddle") != -1) {
+        var tmpx = Math.abs(powerups[findIn("bpaddle")]["xcor"];
+        var tmpy = Math.abs(powerups[findIn(""bpaddle")]["ycor"];
+        ctx.fillStyle = "#FF00FF";
+        ctx.fillRect(tmpx - 10, tmpy - 10, tmpx + 10, tmpy - 10)
+        if (Math.abs(powerups[findIn("fast")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("fast")]["ycor"] - ycor) < 10){
         ctx.drawImage(pad, 30, pycor, 10, 25);
         powerups[findIn("smallpaddle")]["time"] = powerups[findIn("smallpaddle")]["time"] - 1;
         if (powerups[findIn("smallpaddle")]["time"] == 0) {
           powerups.splice(powerups[findIn("smallpaddle")], 1);
         }
+        } else {
+        ctx.drawImage(bad, xcor, ycor, 10, 50);
+      }
+        
       } else {
         ctx.drawImage(bad, xcor, ycor, 10, 50);
       }
