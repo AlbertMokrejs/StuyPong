@@ -143,6 +143,9 @@
 
   var play = function() {
     ctx.clearRect(0, 0, c.width, c.height);
+    if (Math.random() < 0.01){
+      randomPowerUp();
+    }
     movePaddle();
     moveBall();
     //moveAi();
