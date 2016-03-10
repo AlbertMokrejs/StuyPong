@@ -101,7 +101,9 @@ var play = function(){
 	movePaddle();	
 	moveBall();
 	//moveAi();
-	
+	if (Math.floor(Math.random() * 100) == 1){
+		randomPowerUp();
+	}
 	checkScore();
 		if (run){
 		window.requestAnimationFrame(play);
