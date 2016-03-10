@@ -15,11 +15,11 @@ var hrd = document.getElementById("hard");
 
 var powerups = [];
 var paddlev = 0;
-var pycor = window.height/2 - 30;
-
+var pycor = window.innerHeight/2 - 30;
+var plength = 75;
 var pxcor = 30;
 
-var aiycor = window.height/2 -30;
+var aiycor = window.innerHeight/2 -30;
 
 var pad = new Image();
 pad.src = "paddle.png";
@@ -47,8 +47,8 @@ var start = function(e){
   ctx.canvas.width  = window.innerWidth;
   ctx.canvas.height = window.innerHeight;
   if (! exist){
-      xcor = window.width - 50;
-      ycor = window.height/2;
+      xcor = window.innerWidth - 50;
+      ycor = window.innerHeight/2;
       yv = -20;
       xv = Math.random() * 40 - 20;
       exist = ! exist;
@@ -67,8 +67,9 @@ var makePowerUp =  function(a,x,y){
 	var z = {};
 	z["type"] = a;
 	z["xcor"] = x;
-	z["ycor"] = y;
-	if (type == "bpaddle" || type == "smallpaddle"){
+z["ycor"] = y;
+//correction type --> z["type"] 
+	if (z["type"] == "bpaddle" || z["type"] == "smallpaddle"){
 		z["time"] = 600;
 	}
 	else {
@@ -77,8 +78,8 @@ var makePowerUp =  function(a,x,y){
 	return z;
 }
 var makeRandomLoc = function(a){
-	var newx = Math.random() * (window.width - 60) + 30;
-	var newy = Math.random() * (window.height - 60) + 30;
+	var newx = Math.random() * (window.innerWidth - 60) + 30;
+	var newy = Math.random() * (window.innerHeight - 60) + 30;
 	return makePowerUp(a,newx,newy);
 }
 
@@ -112,16 +113,35 @@ var play = function(){
 
 var movePaddle = function(){
 	pycor = pycor + paddlev;
-	ctx.drawImage(pad, 30, pycor, 10, 50);
+/*
+		    if (findIn("bpaddle") != -1){
+		plength = 150;
+		powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
+		if (powerups[findIn("bpaddle")]["time"] == 0){
+			powerups.splice(powerups[findIn("bpaddle")], 1);
+		}
+						      }
+	if (findIn("smallpaddle") != -1){
+		plength = 50;
+		powerups[findIn("smallpaddle")]["time"] = powerups[findIn("smallpaddle")]["time"] - 1;
+		if (powerups[findIn("smallpaddle")]["time"] == 0){
+			plength = 50;
+			powerups.splice(powerups[findIn("smallpaddle")], 1);
+		}
+	}
+	*/			      
+	ctx.drawImage(pad, 30, pycor, 10, plength);
 }
 
+
 var moveBall = function(){
-	if ( (xcor < 40 && ycor > aiycor && ycor < aiycor + 30)  || (xcor > window.width - 50 && ycor > pycor && ycor < pycor + 30)) {
+	if ( (xcor > window.innerWidth - 50 && ycor > aiycor && ycor < aiycor + 30)  || (xcor < 40 && ycor > pycor && ycor < pycor + plength)) {
 		xv *= -1
 	}
-	if (ycor > window.height - 30 || ycor <  30){
+	if (ycor > window.innerHeight || ycor <  0){
 		yv  *= -1
-	}
+						      }
+						      /*
 	if (findIn("randdir") != -1){
 		xv = Math.random() * 40 - 20;
 		yv = Math.random() * 40 - 20;
@@ -137,7 +157,8 @@ var moveBall = function(){
 		if (powerups[findIn("slow")]["time"] == 0){
 			powerups.splice(powerups[findIn("slow")], 1);
 		}
-	}
+						      }
+						      
 	if (findIn("fast") != -1){
 		xv = xv * 2;
 		yv = yv * 2;
@@ -145,28 +166,11 @@ var moveBall = function(){
 		if (powerups[findIn("fast")]["time"] == 0){
 			powerups.splice(powerups[findIn("fast")], 1);
 		}
-	}
+						      }
+						      */
 	xcor += xv;
 	ycor += yv;
 	ctx.drawImage(ball, xcor, ycor, 10, 10);
-	if (findIn("bpaddle") != -1){
-		ctx.drawImage(pad, 30, pycor, 10, 100);
-		powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
-		if (powerups[findIn("bpaddle")]["time"] == 0){
-			powerups.splice(powerups[findIn("bpaddle")], 1);
-		}
-	} else {
-	if (findIn("smallpaddle") != -1){
-		ctx.drawImage(pad, 30, pycor, 10, 25);
-		powerups[findIn("smallpaddle")]["time"] = powerups[findIn("smallpaddle")]["time"] - 1;
-		if (powerups[findIn("smallpaddle")]["time"] == 0){
-			powerups.splice(powerups[findIn("smallpaddle")], 1);
-		}
-	}
-	else {
-	ctx.drawImage(bad, xcor, ycor, 10, 50);
-	}
-	}
 }
 
 var findIn = function(a){
@@ -179,7 +183,7 @@ var findIn = function(a){
 }
 	
 var checkScore = function(){
-	if (xcor > window.width - 30){
+	if (xcor > window.innerWidth - 30){
 		pscore = pscore + 1;
 	ballReset()
 	}
@@ -190,8 +194,8 @@ var checkScore = function(){
 }
 
 var ballReset = function(){
-	xcor = window.width/2;
-	ycor = window.height/2;
+	xcor = window.innerWidth/2;
+	ycor = window.innerHeight/2;
 	xv = 20 * Math.random() - 10;
 	yv = 20 * Math.random() - 10;
 	
@@ -204,42 +208,43 @@ var aiMove = function(){
 
 var aiPredict = function(){
 	if (xv > 0){
-	var t = (window.width - 30 - xcor)/xv
-	var x = Math.abs(t*yv - ycor)%(window.height - 60)* Math.pow(-1, Math.floor(Math.abs(t*yv - ycor)/(window.height - 60)) + (window.height - 60)/2);
+	var t = (window.innerWidth - 30 - xcor)/xv
+	var x = Math.abs(t*yv - ycor)%(window.innerHeight - 60)* Math.pow(-1, Math.floor(Math.abs(t*yv - ycor)/(window.innerHeight - 60)) + (window.innerHeight - 60)/2);
 	}
 	if (xv < 0){
-	var t = ( window.width - 90 + xcor)/xv
-	var x = Math.abs(t*yv - ycor)%(window.height - 60) * Math.pow(-1, Math.floor(Math.abs(t*yv - ycor)/(window.height - 60)) + (window.height - 60)/2);
+	var t = ( window.innerWidth - 90 + xcor)/xv
+	var x = Math.abs(t*yv - ycor)%(window.innerHeight - 60) * Math.pow(-1, Math.floor(Math.abs(t*yv - ycor)/(window.innerHeight - 60)) + (window.innerHeight - 60)/2);
 	}
 	return x 
 }
 
 
 
-var paddleUpdate = function(e){
+var paddleDown = function(e){
 	key = e.keyCode;
 	if (paddlev == 0){
 		paddlev = 10;}
-	if (key == 38){
-		paddlev = math.abs(paddlev);
+	if (key == 40){
+		paddlev = Math.abs(paddlev);
 	}
-	else if (key == 40){
-		paddlev = -1 * math.abs(paddlev);
+	else if (key == 38){
+		paddlev = -1 * Math.abs(paddlev);
 	}
+	console.log("keydown");
 }
 
-var paddleUpdate2 = function(e){
+var paddleUp = function(e){
 	key = e.keyCode;
-	if (key == 38 && paddlev > 0){
+	if (key == 40 && paddlev > 0){
 		paddlev = 0;
 	}
-	else if (key == 40 && paddlev < 0){
+	else if (key == 38 && paddlev < 0){
 		paddlev = 0;
 	}
 }
 
-c.addEventListener("keyup",paddleUpdate2);
-c.addEventListener("keydown", paddleUpdate);
+document.addEventListener("keyup",paddleUp);
+document.addEventListener("keydown", paddleDown);
 eas.addEventListener("click", start);
 </script>
 
