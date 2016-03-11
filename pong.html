@@ -125,7 +125,7 @@ var movePaddle = function(){
     var tmpy = Math.abs(powerups[findIn("bpaddle")]["ycor"]);
     ctx.fillStyle = "#FF00FF";
     ctx.fillRect(tmpx - 5, tmpy - 5, 10,10);
-		if (Math.abs(powerups[findIn("bpaddle")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("fast")]["ycor"] - ycor) < 10){
+		if (Math.abs(powerups[findIn("bpaddle")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("bpaddle")]["ycor"] - ycor) < 10){
     plength *= 1.5;
     }
 		powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
@@ -163,15 +163,15 @@ var moveBall = function(){
 	if (ycor > window.innerHeight || ycor <  0){
 		yv  *= -1
 						      }
-						      
+/*						      
 	if (findIn("randdir") != -1) {
-      var tmpx = Math.abs(powerups[findIn("randdir")]["xcor"];
-      var tmpy = Math.abs(powerups[findIn("randdir")]["ycor"];
+      var tmpx = Math.abs(powerups[findIn("randdir")]["xcor"]);
+      var tmpy = Math.abs(powerups[findIn("randdir")]["ycor"]);
       ctx.fillStyle = "#FF0000";
       ctx.fillRect(tmpx - 5, tmpy - 5, 10,10);
       if (Math.abs(powerups[findIn("randdir")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("randdir")]["ycor"] - ycor) < 10){
-      xv = math.random() * 20 - 10;
-      yv = math.random() * 20 - 10;
+      xv = Math.random() * 20 - 10;
+      yv = Math.random() * 20 - 10;
       powerups[findIn("randdir")]["time"] = powerups[findIn("randdir")]["time"] - 1;
       if (powerups[findIn("randdir")]["time"] == 0) {
         powerups.splice(powerups[findIn("randdir")], 1);
@@ -179,8 +179,8 @@ var moveBall = function(){
       }
     }
     if (findIn("slow") != -1) {
-      var tmpx = Math.abs(powerups[findIn("slow")]["xcor"];
-      var tmpy = Math.abs(powerups[findIn("slow")]["ycor"];
+      var tmpx = Math.abs(powerups[findIn("slow")]["xcor"]);
+      var tmpy = Math.abs(powerups[findIn("slow")]["ycor"]);
       ctx.fillStyle = "#00FF00";
       ctx.fillRect(tmpx - 5, tmpy - 5, 10,10);
       if (Math.abs(powerups[findIn("slow")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("slow")]["ycor"] - ycor) < 10){
@@ -193,8 +193,8 @@ var moveBall = function(){
       }
     }
     if (findIn("fast") != -1) {
-      var tmpx = Math.abs(powerups[findIn("fast")]["xcor"];
-      var tmpy = Math.abs(powerups[findIn("fast")]["ycor"];
+      var tmpx = Math.abs(powerups[findIn("fast")]["xcor"]);
+      var tmpy = Math.abs(powerups[findIn("fast")]["ycor"]);
       ctx.fillStyle = "#0000FF";
       ctx.fillRect(tmpx - 5, tmpy - 5, 10,10);
       if (Math.abs(powerups[findIn("fast")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("fast")]["ycor"] - ycor) < 10){
@@ -206,7 +206,7 @@ var moveBall = function(){
       }
       }
     }
-						      
+*/						      
 	xcor += xv;
 	ycor += yv;
 	ctx.drawImage(ball, xcor, ycor, 10, 10);
