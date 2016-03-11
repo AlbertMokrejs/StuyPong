@@ -1,0 +1,24 @@
+.scoreboard h2 {
+  display: inline-block;
+  font-weight: lighter;
+}
+.scoreboard .player {
+  width: 49%;
+}
+.scoreboard .computer {
+  width: 50%;
+  text-align: right;
+}
+.scoreboard .score {
+  font-weight: bold;
+}
+.controls {
+  margin: auto;
+  width: 200px;
+}
+#game {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0px auto 20px auto;
+  display: block;
+}
