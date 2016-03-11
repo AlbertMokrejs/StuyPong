@@ -165,24 +165,36 @@ var play = function(){
 
 var movePaddle = function(){
 	pycor = pycor + paddlev;
-/*
-		    if (findIn("bpaddle") != -1){
-		plength *= 1.5;
+
+  if (findIn("bpaddle") != -1){
+    var tmpx = Math.abs(powerups[findIn("bpaddle")]["xcor"]);
+    var tmpy = Math.abs(powerups[findIn("bpaddle")]["ycor"]);
+    ctx.fillStyle = "#FF00FF";
+    ctx.fillRect(tmpx - 10, tmpy - 10, tmpx + 10, tmpy - 10);
+		if (Math.abs(powerups[findIn("bpaddle")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("fast")]["ycor"] - ycor) < 10){
+    plength *= 1.5;
+    }
 		powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
 		if (powerups[findIn("bpaddle")]["time"] == 0){
       plength = window.innerHeight/6;
 			powerups.splice(powerups[findIn("bpaddle")], 1);
 		}
-						      }
+	}
 	if (findIn("smallpaddle") != -1){
-		plength *= 2/3;
+    var tmpx = Math.abs(powerups[findIn("smallpaddle")]["xcor"]);
+    var tmpy = Math.abs(powerups[findIn("smallpaddle")]["ycor"]);
+    ctx.fillStyle = "#FFFF00";
+    ctx.fillRect(tmpx - 10, tmpy - 10, tmpx + 10, tmpy - 10)
+		if (Math.abs(powerups[findIn("smallpaddle")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("smallpaddle")]["ycor"] - ycor) < 10){
+    ctx.clearRect(tmpx - 10, tmpy - 10, 20, 20)
+    plength *= 2/3;
+    }
 		powerups[findIn("smallpaddle")]["time"] = powerups[findIn("smallpaddle")]["time"] - 1;
 		if (powerups[findIn("smallpaddle")]["time"] == 0){
 			plength = window.innerHeight/6;
 			powerups.splice(powerups[findIn("smallpaddle")], 1);
 		}
-	}
-	*/			      
+	}			      
 	ctx.drawImage(pad, 30, pycor, pheight, plength);
 }
 
