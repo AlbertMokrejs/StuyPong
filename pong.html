@@ -126,13 +126,13 @@ var movePaddle = function(){
     ctx.fillStyle = "#FF00FF";
     ctx.fillRect(tmpx - 5, tmpy - 5, 10,10);
 		if (Math.abs(powerups[findIn("bpaddle")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("bpaddle")]["ycor"] - ycor) < 10){
-    plength *= 1.5;
-    }
+    plength *= 1.25;
 		powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
 		if (powerups[findIn("bpaddle")]["time"] == 0){
       plength = window.innerHeight/6;
 			powerups.splice(powerups[findIn("bpaddle")], 1);
-		}
+																	}
+																	}
 	}
 	if (findIn("smallpaddle") != -1){
     var tmpx = Math.abs(powerups[findIn("smallpaddle")]["xcor"]);
@@ -141,13 +141,14 @@ var movePaddle = function(){
     ctx.fillRect(tmpx - 5, tmpy - 5, 10,10);
 		if (Math.abs(powerups[findIn("smallpaddle")]["xcor"] - xcor) < 10 && Math.abs(powerups[findIn("smallpaddle")]["ycor"] - ycor) < 10){
     plength *= 2/3;
-    }
+    
 		powerups[findIn("smallpaddle")]["time"] = powerups[findIn("smallpaddle")]["time"] - 1;
 		if (powerups[findIn("smallpaddle")]["time"] == 0){
 			plength = window.innerHeight/6;
 			powerups.splice(powerups[findIn("smallpaddle")], 1);
 		}
-	}			      
+}
+																		}			      
 	ctx.drawImage(pad, 30, pycor, pheight, plength);
 }
 
