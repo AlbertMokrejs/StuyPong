@@ -3,6 +3,9 @@
 <button id="easy">Easy</button>
 <button id="med">Medium</button>
 <button id="hard">Hard</button>
+<br>
+Player Score: <p id ="pscore"></p>
+AI Score: <p id ="cscore"></p>
 
 <script>
   var c = document.getElementById("slate");
@@ -15,11 +18,11 @@
 
 var powerups = [];
 var paddlev = 0;
-var pycor = window.innerHeight/2 - 30;
-var plength = 75;
-var pxcor = 30;
+var plength = window.innerHeight/6;
+var pheight = 10;
+var pycor = window.innerHeight/2 - (plength/2);
 
-var aiycor = window.innerHeight/2 -30;
+var aiycor = window.innerHeight/2 - (plength/2);
 
   var pad = new Image();
   pad.src = "paddle.png";
@@ -92,6 +95,8 @@ var start = function(e){
   e.preventDefault();
   ctx.canvas.width  = window.innerWidth;
   ctx.canvas.height = window.innerHeight;
+  pscore = 0;
+  cscore = 0;
   if (! exist){
       xcor = window.innerWidth - 50;
       ycor = window.innerHeight/2;
@@ -102,7 +107,7 @@ var start = function(e){
 
 window.requestAnimationFrame(play);
   }
-<<<<<<< HEAD
+
   if (! run){
 run = ! run;
 	window.requestAnimationFrame(play);
@@ -148,7 +153,7 @@ var play = function(){
 	ctx.clearRect(0,0,c.width,c.height);
 	movePaddle();	
 	moveBall();
-	//moveAi();
+	aiMove();
 	if (Math.floor(Math.random() * 100) == 1){
 		randomPowerUp();
 	}
@@ -162,28 +167,33 @@ var movePaddle = function(){
 	pycor = pycor + paddlev;
 /*
 		    if (findIn("bpaddle") != -1){
-		plength = 150;
+		plength *= 1.5;
 		powerups[findIn("bpaddle")]["time"] = powerups[findIn("bpaddle")]["time"] - 1;
 		if (powerups[findIn("bpaddle")]["time"] == 0){
+      plength = window.innerHeight/6;
 			powerups.splice(powerups[findIn("bpaddle")], 1);
 		}
 						      }
 	if (findIn("smallpaddle") != -1){
-		plength = 50;
+		plength *= 2/3;
 		powerups[findIn("smallpaddle")]["time"] = powerups[findIn("smallpaddle")]["time"] - 1;
 		if (powerups[findIn("smallpaddle")]["time"] == 0){
-			plength = 50;
+			plength = window.innerHeight/6;
 			powerups.splice(powerups[findIn("smallpaddle")], 1);
 		}
 	}
 	*/			      
-	ctx.drawImage(pad, 30, pycor, 10, plength);
+	ctx.drawImage(pad, 30, pycor, pheight, plength);
 }
 
 
 var moveBall = function(){
-	if ( (xcor > window.innerWidth - 50 && ycor > aiycor && ycor < aiycor + 30)  || (xcor < 40 && ycor > pycor && ycor < pycor + plength)) {
-		xv *= -1
+	if (xcor > window.innerWidth - 50 && ycor > aiycor && ycor < aiycor + 30) {
+      xv *= -1
+  }
+  else if (xcor < 40 && ycor > pycor && ycor < pycor + plength) {
+		xv += paddlev/2
+    xv *= -1
 	}
 	if (ycor > window.innerHeight || ycor <  0){
 		yv  *= -1
@@ -238,6 +248,8 @@ var checkScore = function(){
 		cscore = cscore + 1;
 		ballReset()
 	}
+  document.getElementById("pscore").innerHTML = pscore.toString();
+  document.getElementById("cscore").innerHTML = cscore.toString();
 }
 
 var ballReset = function(){
@@ -293,4 +305,5 @@ var paddleUp = function(e){
 document.addEventListener("keyup",paddleUp);
 document.addEventListener("keydown", paddleDown);
 eas.addEventListener("click", start);
+clr.addEventListener("clear", start);
 </script>
